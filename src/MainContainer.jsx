@@ -13,6 +13,19 @@ const MainContainer = ({ weatherData }) => {
   // Current weather (first item in the list)
   const currentWeather = list[0];
 
+  // Group weather data by date
+  const groupedByDate = list.reduce((acc, item) => {
+    const date = item.dt_txt.split(' ')[0]; // Get only the date part (e.g., "2024-12-19")
+    if (!acc[date]) {
+      acc[date] = [];
+    }
+    acc[date].push(item);
+    return acc;
+  }, {});
+
+  // Get the first 4 dates
+  const forecastDates = Object.keys(groupedByDate).slice(0, 4);
+
   return (
     <div
       style={{
@@ -71,41 +84,45 @@ const MainContainer = ({ weatherData }) => {
           overflowX: 'auto', 
         }}
       >
-        {list.slice(0, 4).map((item, index) => (
-          <div
-            key={index}
-            style={{
-              flex: '1 1 200px', 
-              maxWidth: '250px', 
-              minWidth: '150px', 
-              padding: '15px',
-              borderRadius: '20px',
-              background: 'rgba(255, 255, 255, 0.2)',
-              boxShadow: 'rgba(0, 0, 0, 0.1) 0px 4px 12px',
-              textAlign: 'center',
-              color: '#fff',
-            }}
-          >
-            <h6 style={{ marginBottom: '10px', fontWeight: 'bold' }}>
-              {new Date(item.dt_txt).toLocaleDateString('en-US', {
-                weekday: 'short',
-                month: 'short',
-                day: 'numeric',
-              })}
-            </h6>
-            <img
-              src={`https://openweathermap.org/img/wn/${item.weather[0].icon}@2x.png`}
-              alt="weather-icon"
-              style={{ width: '80px', height: '80px' }}
-            />
-            <p style={{ margin: '10px 0', textTransform: 'capitalize' }}>
-              {item.weather[0].description}
-            </p>
-            <h6 style={{ fontSize: '18px', fontWeight: 'bold' }}>
-              {kelvinToCelsius(item.main.temp)}°C
-            </h6>
-          </div>
-        ))}
+        {forecastDates.map((date, index) => {
+          const forecastForDay = groupedByDate[date];
+
+          return (
+            <div
+              key={index}
+              style={{
+                flex: '1 1 200px', 
+                maxWidth: '250px', 
+                minWidth: '150px', 
+                padding: '15px',
+                borderRadius: '20px',
+                background: 'rgba(255, 255, 255, 0.2)',
+                boxShadow: 'rgba(0, 0, 0, 0.1) 0px 4px 12px',
+                textAlign: 'center',
+                color: '#fff',
+              }}
+            >
+              <h6 style={{ marginBottom: '10px', fontWeight: 'bold' }}>
+                {new Date(date).toLocaleDateString('en-US', {
+                  weekday: 'short', 
+                  month: 'short', 
+                  day: 'numeric',
+                })}
+              </h6>
+              <img
+                src={`https://openweathermap.org/img/wn/${forecastForDay[0]?.weather[0]?.icon}@2x.png`}
+                alt="weather-icon"
+                style={{ width: '80px', height: '80px' }}
+              />
+              <p style={{ margin: '10px 0', textTransform: 'capitalize' }}>
+                {forecastForDay[0]?.weather[0]?.description}
+              </p>
+              <h6 style={{ fontSize: '18px', fontWeight: 'bold' }}>
+                {kelvinToCelsius(forecastForDay[0]?.main.temp)}°C
+              </h6>
+            </div>
+          );
+        })}
       </div>
     </div>
   );

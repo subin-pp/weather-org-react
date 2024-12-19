@@ -41,7 +41,7 @@ function App() {
 
   return (
     <div
-      className="d-flex justify-content-start align-items-center flex-column gap-0"
+      className="d-flex justify-content-start align-items-center flex-column gap-4"
       style={{
         backgroundImage: `url(${backgroundImg})`,
         backgroundSize: 'cover',
