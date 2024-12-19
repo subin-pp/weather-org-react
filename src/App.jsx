@@ -46,14 +46,14 @@ function App() {
         backgroundImage: `url(${backgroundImg})`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
-        backgroundRepeat: 'no-repeat', // Prevents tiling
-        width: '100%', // Ensures it spans the full width
-        height: '100vh', // Full viewport height
-        overflow: 'hidden', // Avoids overflow issues on smaller screens
-        display: 'flex', // Flexbox for positioning elements
-        justifyContent: 'center', // Center elements horizontally
-        alignItems: 'center', // Center elements vertically
-        flexDirection: 'column', // Stack elements vertically
+        backgroundRepeat: 'no-repeat', 
+        width: '100%', 
+        height: '100vh', 
+        overflow: 'hidden', 
+        display: 'flex', 
+        justifyContent: 'center',
+        alignItems: 'center', 
+        flexDirection: 'column',
         padding: '10px',
       }}
     >

@@ -2,7 +2,7 @@ import React from 'react';
 
 // Function to convert temperature from Kelvin to Celsius
 const kelvinToCelsius = (kelvin) => {
-  return (kelvin - 273.15).toFixed(2); // Convert to Celsius and round to 2 decimal places
+  return (kelvin - 273.15).toFixed(2); 
 };
 
 const MainContainer = ({ weatherData }) => {
@@ -66,18 +66,18 @@ const MainContainer = ({ weatherData }) => {
         style={{
           display: 'flex',
           justifyContent: 'space-evenly',
-          flexWrap: 'nowrap', // Prevent wrapping of cards
+          flexWrap: 'nowrap', 
           gap: '20px',
-          overflowX: 'auto', // Add horizontal scroll if content overflows on smaller screens
+          overflowX: 'auto', 
         }}
       >
         {list.slice(0, 4).map((item, index) => (
           <div
             key={index}
             style={{
-              flex: '1 1 200px', // Cards will resize and stay side by side
-              maxWidth: '250px', // Max width for cards
-              minWidth: '150px', // Prevent cards from becoming too small
+              flex: '1 1 200px', 
+              maxWidth: '250px', 
+              minWidth: '150px', 
               padding: '15px',
               borderRadius: '20px',
               background: 'rgba(255, 255, 255, 0.2)',
